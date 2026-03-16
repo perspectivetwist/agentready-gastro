@@ -1,6 +1,6 @@
 const rateMap = new Map<string, { count: number; resetTime: number }>()
 
-const MAX_REQUESTS = 999 // TODO: zurück auf 5 setzen nach Testing
+const MAX_REQUESTS = 5
 const WINDOW_MS = 60 * 60 * 1000 // 1 Stunde
 
 export function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {

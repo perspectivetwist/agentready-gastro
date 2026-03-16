@@ -15,22 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  robots: { index: false, follow: false },
-  title: "Slipstream – Können KI-Agenten auf deiner Website handeln?",
+  robots: { index: true, follow: true },
+  title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
   description:
-    "Kostenloser Agent-Readiness-Check: Misst in 20 Sekunden ob KI-Agenten deine Website finden, verstehen und darauf handeln können.",
+    "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
   openGraph: {
-    title: "Slipstream – Agent-Readiness für deine Website",
+    title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
     description:
-      "Kostenloser Check: Können KI-Agenten auf deiner Website handeln?",
-    url: "https://agentready-transformer.vercel.app",
-    siteName: "Slipstream",
+      "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
+    url: "https://agentready-gastro.vercel.app",
+    siteName: "AgentReady Gastro Scanner",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Slipstream Agent-Readiness Check",
-    description: "Können KI-Agenten auf deiner Website handeln? Kostenloser Check.",
+    title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
+    description: "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
   },
 };
 

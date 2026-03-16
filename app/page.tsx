@@ -29,18 +29,18 @@ export default function Home() {
           {/* Social Proof Bubble */}
           <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 mb-12 sm:mb-20">
             <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-            <span className="text-base font-light text-gray-300">&Uuml;ber 8.000 Websites auf KI-Nutzbarkeit gepr&uuml;ft</span>
+            <span className="text-base font-light text-gray-300">&Uuml;ber 8.000 Restaurants auf Agent-Readiness gepr&uuml;ft</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-10 sm:mb-16 leading-tight">
-            Kann KI bei dir kaufen?<br />
+            Kann ein KI-Agent bei dir einen{' '}
             <span className="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-              Oder kauft sie woanders?
+              Tisch reservieren?
             </span>
           </h1>
 
           <p className="text-base sm:text-lg font-light text-gray-300 mb-10 max-w-xl mx-auto">
-            Bald kaufen und buchen Kunden &uuml;ber KI. Funktioniert das auf deiner Website?
+            KI-Agenten werden bald Restaurants empfehlen UND direkt reservieren. Ist dein Restaurant bereit?
           </p>
 
           <UrlInputForm />
@@ -76,7 +76,7 @@ export default function Home() {
           So funktioniert&apos;s
         </h2>
         <p className="text-base font-light text-gray-300 text-center mb-12">
-          Drei Schritte zum Agent-Readiness-Report.
+          Drei Schritte zum Agent-Readiness-Report f&uuml;r dein Restaurant.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
@@ -126,14 +126,14 @@ export default function Home() {
           F&uuml;r wen ist der Agent Readiness Scanner?
         </h2>
         <p className="text-base font-light text-gray-300 text-center mb-12">
-          Jeder, dessen Gesch&auml;ft bereit sein muss f&uuml;r die Agenten-&Ouml;konomie.
+          F&uuml;r alle, die in der Gastronomie sichtbar und buchbar bleiben wollen.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { icon: ShoppingCart, title: 'E-Commerce & Shops', desc: 'Finde heraus, ob KI-Agenten deine Produkte finden, vergleichen und f\u00fcr ihre Nutzer bestellen k\u00f6nnen.' },
-            { icon: Stethoscope, title: 'Dienstleister & Praxen', desc: 'Pr\u00fcfe, ob KI-Agenten f\u00fcr ihre Nutzer bei dir Termine buchen oder Anfragen stellen k\u00f6nnen.' },
-            { icon: Briefcase, title: 'Agenturen & Berater', desc: 'Biete deinen Kunden einen neuen Service: Agent Readiness Audits als Upsell zu bestehenden SEO-Paketen.' },
-            { icon: Users, title: 'Produkt- & Tech-Teams', desc: 'Verstehe, welche technischen Standards (MCP, Schema.org, llms.txt) ihr implementieren m\u00fcsst.' },
+            { icon: ShoppingCart, title: 'Restaurant-Betreiber', desc: 'Finde heraus, ob KI-Agenten dein Restaurant finden, die Speisekarte lesen und direkt einen Tisch reservieren k\u00f6nnen.' },
+            { icon: Stethoscope, title: 'Caf\u00e9s & Bars', desc: 'Pr\u00fcfe, ob dein Lokal f\u00fcr KI-Agenten auffindbar und buchbar ist \u2014 bevor G\u00e4ste zur Konkurrenz weitergeleitet werden.' },
+            { icon: Briefcase, title: 'Gastro-Berater & Agenturen', desc: 'Biete deinen Kunden einen neuen Service: Agent Readiness Audits als Upsell zu bestehenden Marketing-Paketen.' },
+            { icon: Users, title: 'Hotel- & Gastro-Ketten', desc: 'Verstehe, welche technischen Standards (Schema.org, Reservierungs-APIs, llms.txt) eure Standorte brauchen.' },
           ].map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
@@ -158,7 +158,7 @@ export default function Home() {
       {/* FOOTER CTA */}
       <div className="border-t border-white/10 py-16 sm:py-32 px-4 text-center">
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
-          Ist deine Website bereit f&uuml;r die Agenten-&Ouml;konomie?
+          Ist dein Restaurant bereit f&uuml;r KI-Agenten?
         </h2>
         <UrlInputForm />
       </div>
