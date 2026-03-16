@@ -17,21 +17,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   robots: { index: true, follow: true },
-  title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
+  title: "KI-Agent Readiness für Gastronomie | Kann KI bei deinem Restaurant reservieren?",
   description:
-    "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
+    "Kostenloser Agent-Readiness-Scan für die Gastronomie: Ist dein Restaurant für KI-Agenten buchbar? Jetzt prüfen.",
   openGraph: {
-    title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
+    title: "KI-Agent Readiness für Gastronomie | Kann KI bei deinem Restaurant reservieren?",
     description:
-      "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
+      "Kostenloser Agent-Readiness-Scan für die Gastronomie: Ist dein Restaurant für KI-Agenten buchbar?",
     url: "https://agentready-gastro.vercel.app",
     siteName: "AgentReady Gastro Scanner",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "KI-Agent Readiness | Kann KI bei deinem Restaurant reservieren?",
-    description: "Kostenloser Scan: Ist dein Restaurant für KI-Agenten buchbar? Jetzt Agent-Readiness prüfen.",
+    title: "KI-Agent Readiness für Gastronomie | Restaurant-Scanner",
+    description: "Kostenloser Agent-Readiness-Scan für die Gastronomie: Ist dein Restaurant für KI-Agenten buchbar?",
   },
 };
 
