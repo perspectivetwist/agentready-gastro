@@ -8,6 +8,7 @@ import DimensionBars from '@/components/DimensionBars'
 import ActionPlan from '@/components/ActionPlan'
 import RankingCard from '@/components/RankingCard'
 import EmailGate from '@/components/EmailGate'
+import CrossSell from '@/components/CrossSell'
 
 function ResultsContent() {
   const searchParams = useSearchParams()
@@ -124,6 +125,8 @@ function ResultsContent() {
         {result.actionPlan && (
           <ActionPlan actionPlan={result.actionPlan} isUnlocked={isUnlocked} />
         )}
+
+        <CrossSell />
 
         <div className="text-center pt-4">
           <a
