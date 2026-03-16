@@ -4,6 +4,7 @@ import { calculateScore } from '@/lib/scorer'
 import { generateActionPlan } from '@/lib/transformer'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { getScoreBand, getScoreBandInfo } from '@/lib/score-bands'
+import { pingIndexNow } from '@/lib/indexnow'
 
 const MAX_URL_LENGTH = 500
 const INTERNAL_IP_PATTERNS = [
@@ -76,6 +77,9 @@ export async function POST(request: NextRequest) {
     }
 
     const bandInfo = getScoreBandInfo(score.totalScore)
+
+    // IndexNow: Result-URL an Bing pushen (fire-and-forget)
+    pingIndexNow(scraped.url)
 
     return NextResponse.json({
       url: scraped.url,
