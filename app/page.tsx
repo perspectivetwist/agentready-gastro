@@ -33,14 +33,14 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-10 sm:mb-16 leading-tight">
-            Kann ein KI-Agent bei dir einen{' '}
+            Agent-Readiness-Test{' '}
             <span className="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-              Tisch reservieren?
+              f&uuml;r dein Restaurant
             </span>
           </h1>
 
           <p className="text-base sm:text-lg font-light text-gray-300 mb-10 max-w-xl mx-auto">
-            KI-Agenten werden bald Restaurants empfehlen UND direkt reservieren. Ist dein Restaurant bereit?
+            KI-Agenten buchen bald Tische, bestellen Essen und empfehlen Restaurants. Pr&uuml;fe kostenlos ob dein Restaurant bereit ist.
           </p>
 
           <UrlInputForm />
