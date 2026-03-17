@@ -9,6 +9,7 @@ import ActionPlan from '@/components/ActionPlan'
 import RankingCard from '@/components/RankingCard'
 import EmailGate from '@/components/EmailGate'
 import CrossSell from '@/components/CrossSell'
+import { trackScanComplete, trackEmailGate } from '@/lib/gtag'
 
 function ResultsContent() {
   const searchParams = useSearchParams()
@@ -37,6 +38,8 @@ function ResultsContent() {
         const data: SlipstreamResult = JSON.parse(cached)
         sessionStorage.removeItem('slipstream_result')
         setResult(data)
+        trackScanComplete(decodeURIComponent(url), data.totalScore)
+        if (!isUnlocked) trackEmailGate('shown')
         setLoading(false)
         return
       } catch {
@@ -59,6 +62,8 @@ function ResultsContent() {
         }
 
         setResult(data)
+        trackScanComplete(decodeURIComponent(url), data.totalScore)
+        if (!isUnlocked) trackEmailGate('shown')
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unbekannter Fehler')
       } finally {
