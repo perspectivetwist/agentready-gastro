@@ -6,16 +6,16 @@ import { ChevronDown, ChevronUp, Shield, ServerOff, MapPin } from 'lucide-react'
 const faqItems = [
   {
     question: 'Was macht den Agent-Readiness Check einzigartig?',
-    answer: 'In 20 Sekunden prüft der Scanner ob KI-Agenten auf deiner Restaurant-Website handeln können — nicht nur ob sie dich finden. Wir messen 5 Dimensionen: Zugang, Parsability, Entity-Vertrauen, Auffindbarkeit und Interaktivität. Kein Account, keine Agentur, kein Warten.',
+    answer: 'In 20 Sekunden prüft der Scanner ob KI-Agenten auf deiner Restaurant-Website handeln können, nicht nur ob sie dich finden. Wir messen 5 Dimensionen: Zugang, Parsability, Entity-Vertrauen, Auffindbarkeit und Interaktivität. Kein Account, keine Agentur, kein Warten.',
     alwaysOpen: true,
   },
   {
     question: 'Warum gibt es den Agent-Readiness Scanner und warum jetzt?',
-    answer: 'Weil KI-Agenten bereits Tische reservieren, Speisekarten vergleichen und Restaurants empfehlen — und die meisten Restaurant-Websites dafür nicht bereit sind.\n\nChatGPT, Perplexity und Google handeln zunehmend autonom im Auftrag von Nutzern. Wer technisch nicht zugänglich ist, wird übersprungen. Die Zahlen:\n\n• Bis 2028 werden 15% aller Kaufentscheidungen von KI-Agenten getroffen (Gartner 2025)\n• KI-Agenten scheitern an Websites die nur per JavaScript gerendert werden — der Content ist für sie unsichtbar\n• robots.txt ohne GPTBot-Freigabe = vollständige Blockade für ChatGPT-Agenten\n• Nur 0,027% aller Websites haben überhaupt einen KI-Agent-Einstiegspunkt (IEEE Symposium 2026)\n• llms.txt als neuer Standard für Agent-Readiness: noch unter 1% der Websites haben ihn\n\nDer Scanner zeigt in Sekunden ob ein KI-Agent auf deiner Restaurant-Website tatsächlich handeln kann — oder scheitert bevor er es versucht.',
+    answer: 'Weil KI-Agenten bereits Tische reservieren, Speisekarten vergleichen und Restaurants empfehlen, und die meisten Restaurant-Websites dafür nicht bereit sind.\n\nChatGPT, Perplexity und Google handeln zunehmend autonom im Auftrag von Nutzern. Wer technisch nicht zugänglich ist, wird übersprungen. Die Zahlen:\n\n• Bis 2028 werden 15% aller Kaufentscheidungen von KI-Agenten getroffen (Gartner 2025)\n• KI-Agenten scheitern an Websites die nur per JavaScript gerendert werden. Der Content ist für sie unsichtbar\n• robots.txt ohne GPTBot-Freigabe = vollständige Blockade für ChatGPT-Agenten\n• Nur 0,027% aller Websites haben überhaupt einen KI-Agent-Einstiegspunkt (IEEE Symposium 2026)\n• llms.txt als neuer Standard für Agent-Readiness: noch unter 1% der Websites haben ihn\n\nDer Scanner zeigt in Sekunden ob ein KI-Agent auf deiner Restaurant-Website tatsächlich handeln kann oder scheitert bevor er es versucht.',
   },
   {
     question: 'Was ist Agent-Readiness für Restaurants?',
-    answer: 'Agent-Readiness misst, ob KI-Agenten (wie ChatGPT, Claude, Perplexity) deine Restaurant-Website nicht nur finden, sondern auch verstehen und darauf handeln können — Tische reservieren, Speisekarten lesen, Anfragen stellen. Restaurants die nicht Agent-Ready sind, verlieren zunehmend Gäste an Wettbewerber die es sind.',
+    answer: 'Agent-Readiness misst, ob KI-Agenten (wie ChatGPT, Claude, Perplexity) deine Restaurant-Website nicht nur finden, sondern auch verstehen und darauf handeln können: Tische reservieren, Speisekarten lesen, Anfragen stellen. Restaurants die nicht Agent-Ready sind, verlieren zunehmend Gäste an Wettbewerber die es sind.',
   },
   {
     question: 'Welche 5 Dimensionen werden geprüft?',
@@ -23,18 +23,18 @@ const faqItems = [
   },
   {
     question: 'Was zeigt der Agent-Readiness Score?',
-    answer: 'Der Score (0–100) zeigt wie bereit deine Restaurant-Website für die Agenten-Ökonomie ist. Unter 30 = kritisch (Agenten können nicht handeln), 31–60 = Verbesserungsbedarf, 61–85 = gut, über 85 = Agent-Ready. Zusätzlich bekommst du einen konkreten Aktionsplan.',
+    answer: 'Der Score (0-100) zeigt wie bereit deine Restaurant-Website für die Agenten-Ökonomie ist. Unter 30 = kritisch (Agenten können nicht handeln), 31-60 = Verbesserungsbedarf, 61-85 = gut, über 85 = Agent-Ready. Zusätzlich bekommst du einen konkreten Aktionsplan.',
   },
   {
     question: 'Brauche ich einen Account oder Installation?',
-    answer: 'Nein. Der Agent-Readiness Check ist kostenlos, ohne Account und ohne Installation. URL eingeben, warten, Ergebnis lesen — DSGVO-konform und ohne Datenspeicherung.',
+    answer: 'Nein. Der Agent-Readiness Check ist kostenlos, ohne Account und ohne Installation. URL eingeben, warten, Ergebnis lesen. DSGVO-konform und ohne Datenspeicherung.',
   },
   {
     question: 'Für wen ist der Agent-Check relevant?',
-    answer: 'Für jeden Gastronomiebetrieb der Gäste gewinnen will: Restaurants, Cafés, Hotels, Catering-Unternehmen. Besonders wichtig für Betriebe mit Online-Reservierungen, Speisekarten oder Anfrage-Formularen — denn dort können Agenten direkt für deine Gäste handeln.',
+    answer: 'Für jeden Gastronomiebetrieb der Gäste gewinnen will: Restaurants, Cafés, Hotels, Catering-Unternehmen. Besonders wichtig für Betriebe mit Online-Reservierungen, Speisekarten oder Anfrage-Formularen, denn dort können Agenten direkt für deine Gäste handeln.',
   },
   {
-    question: 'Was ist WebMCP — und warum verliere ich Reservierungen ohne es?',
+    question: 'Was ist WebMCP und warum verliere ich Reservierungen ohne es?',
     answer: 'KI-Agenten wie ChatGPT oder Perplexity können heute Restaurant-Websites lesen, aber noch nicht eigenständig handeln. WebMCP ist der neue Standard der das ändert: Er gibt Agenten eine strukturierte Schnittstelle um Reservierungen, Bestellungen oder Anfragen direkt abzuschließen, ohne dass ein Gast klickt. Restaurant-Websites ohne WebMCP-Unterstützung werden von Agenten übersprungen und leiten Gäste automatisch zur Konkurrenz weiter. Der Scanner misst ob deine Website bereit ist und zeigt dir im Aktionsplan konkret wie du WebMCP implementierst, bevor deine Konkurrenz es tut.',
   },
 ]

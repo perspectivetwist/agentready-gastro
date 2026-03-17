@@ -42,7 +42,7 @@ function scoreZugang(data: ScrapedData): DimensionScore {
       score += 20
       findings.push({ criterion: 'AI-Crawler erlaubt (robots.txt)', passed: false, businessImpact: 'Globales Disallow blockiert alle Crawler inkl. KI-Agenten', fix: 'User-agent: GPTBot und ClaudeBot explizit erlauben oder globales Disallow entfernen' })
     } else {
-      findings.push({ criterion: 'AI-Crawler erlaubt (robots.txt)', passed: false, businessImpact: 'KI-Agenten werden aktiv blockiert — Website ist unsichtbar für KI-Suche', fix: 'GPTBot und ClaudeBot in robots.txt erlauben: User-agent: GPTBot → Allow: /' })
+      findings.push({ criterion: 'AI-Crawler erlaubt (robots.txt)', passed: false, businessImpact: 'KI-Agenten werden aktiv blockiert. Website ist unsichtbar für KI-Suche', fix: 'GPTBot und ClaudeBot in robots.txt erlauben: User-agent: GPTBot, Allow: /' })
     }
 
     // Bonus: Explizites Allow für AI-Crawler
@@ -52,13 +52,13 @@ function scoreZugang(data: ScrapedData): DimensionScore {
   } else {
     // Kein robots.txt = implizit erlaubt
     score += 40
-    findings.push({ criterion: 'AI-Crawler erlaubt (robots.txt)', passed: true, businessImpact: 'Kein robots.txt — alle Crawler erlaubt (Standard)', fix: '' })
+    findings.push({ criterion: 'AI-Crawler erlaubt (robots.txt)', passed: true, businessImpact: 'Kein robots.txt, alle Crawler erlaubt (Standard)', fix: '' })
   }
 
   // HTTPS aktiv? (10%)
   if (data.isHttps) {
     score += 40
-    findings.push({ criterion: 'HTTPS aktiv', passed: true, businessImpact: 'Verschlüsselte Verbindung — Vertrauen für KI-Agenten', fix: '' })
+    findings.push({ criterion: 'HTTPS aktiv', passed: true, businessImpact: 'Verschlüsselte Verbindung, Vertrauen für KI-Agenten', fix: '' })
   } else {
     findings.push({ criterion: 'HTTPS aktiv', passed: false, businessImpact: 'Ohne HTTPS stufen KI-Systeme Quellen als weniger vertrauenswürdig ein', fix: 'SSL-Zertifikat einrichten und HTTP auf HTTPS redirecten' })
   }
@@ -96,9 +96,9 @@ function scoreParsability(data: ScrapedData): DimensionScore {
     findings.push({ criterion: 'Inhalte ohne JavaScript lesbar', passed: true, businessImpact: 'KI-Agenten können Inhalte direkt parsen', fix: '' })
   } else if (textLength > 100) {
     score += 30
-    findings.push({ criterion: 'Inhalte ohne JavaScript lesbar', passed: false, businessImpact: 'Wenig Inhalt für KI-Agenten extrahierbar — möglicherweise JS-Rendering nötig', fix: 'Server-Side Rendering (SSR) oder Static Site Generation (SSG) implementieren' })
+    findings.push({ criterion: 'Inhalte ohne JavaScript lesbar', passed: false, businessImpact: 'Wenig Inhalt für KI-Agenten extrahierbar, möglicherweise JS-Rendering nötig', fix: 'Server-Side Rendering (SSR) oder Static Site Generation (SSG) implementieren' })
   } else {
-    findings.push({ criterion: 'Inhalte ohne JavaScript lesbar', passed: false, businessImpact: 'Kaum Inhalte ohne JavaScript — KI-Agenten sehen eine leere Seite', fix: 'Von Client-Side Rendering auf SSR/SSG umstellen' })
+    findings.push({ criterion: 'Inhalte ohne JavaScript lesbar', passed: false, businessImpact: 'Kaum Inhalte ohne JavaScript. KI-Agenten sehen eine leere Seite', fix: 'Von Client-Side Rendering auf SSR/SSG umstellen' })
   }
 
   // SSR erkennbar (10%) — Heuristik: Meta-Tags und strukturierte Headings
@@ -113,7 +113,7 @@ function scoreParsability(data: ScrapedData): DimensionScore {
     score += 20
     findings.push({ criterion: 'Strukturierte Inhalte (Headings)', passed: false, businessImpact: 'Headings vorhanden aber wenig Inhalt', fix: 'Mehr strukturierten Text unter den Überschriften hinzufügen' })
   } else {
-    findings.push({ criterion: 'Strukturierte Inhalte (Headings)', passed: false, businessImpact: 'Keine Überschriften-Struktur — KI-Agenten können Inhalte schwer einordnen', fix: 'Semantische H1-H3 Headings verwenden' })
+    findings.push({ criterion: 'Strukturierte Inhalte (Headings)', passed: false, businessImpact: 'Keine Überschriften-Struktur. KI-Agenten können Inhalte schwer einordnen', fix: 'Semantische H1-H3 Headings verwenden' })
   }
 
   return { id: 'parsability', name: 'Parsability', score, weight: 0.25, findings }
@@ -152,7 +152,7 @@ function scoreEntityVertrauen(data: ScrapedData): DimensionScore {
     score += 25
     findings.push({ criterion: 'Social-Profile-Links (sameAs)', passed: true, businessImpact: 'KI kann die Entität über Social Profiles verifizieren', fix: '' })
   } else {
-    findings.push({ criterion: 'Social-Profile-Links (sameAs)', passed: false, businessImpact: 'Keine verknüpften Social Profiles — KI kann Entität nicht cross-referenzieren', fix: 'sameAs-Links in Schema.org oder sichtbare Social-Links hinzufügen' })
+    findings.push({ criterion: 'Social-Profile-Links (sameAs)', passed: false, businessImpact: 'Keine verknüpften Social Profiles. KI kann Entität nicht cross-referenzieren', fix: 'sameAs-Links in Schema.org oder sichtbare Social-Links hinzufügen' })
   }
 
   // NAP-Konsistenz (Name, Adresse, Phone)? (5%)
@@ -165,7 +165,7 @@ function scoreEntityVertrauen(data: ScrapedData): DimensionScore {
     score += 25
     findings.push({ criterion: 'NAP-Daten (Name, Adresse, Telefon)', passed: true, businessImpact: 'Kontaktdaten stärken Entity-Vertrauen für lokale KI-Suche', fix: '' })
   } else {
-    findings.push({ criterion: 'NAP-Daten (Name, Adresse, Telefon)', passed: false, businessImpact: 'Keine Kontaktdaten erkennbar — schwächt lokales KI-Vertrauen', fix: 'Adresse und Telefonnummer sichtbar auf der Website und in Schema.org hinterlegen' })
+    findings.push({ criterion: 'NAP-Daten (Name, Adresse, Telefon)', passed: false, businessImpact: 'Keine Kontaktdaten erkennbar, schwächt lokales KI-Vertrauen', fix: 'Adresse und Telefonnummer sichtbar auf der Website und in Schema.org hinterlegen' })
   }
 
   return { id: 'entity-vertrauen', name: 'Entity-Vertrauen', score, weight: 0.20, findings }
@@ -181,7 +181,7 @@ function scoreAuffindbarkeit(data: ScrapedData): DimensionScore {
     score += 50
     findings.push({ criterion: 'sitemap.xml vorhanden', passed: true, businessImpact: 'KI-Agenten können alle Seiten systematisch finden', fix: '' })
   } else {
-    findings.push({ criterion: 'sitemap.xml vorhanden', passed: false, businessImpact: 'Ohne Sitemap müssen KI-Agenten Links manuell folgen — Seiten werden übersehen', fix: 'sitemap.xml generieren und in robots.txt referenzieren' })
+    findings.push({ criterion: 'sitemap.xml vorhanden', passed: false, businessImpact: 'Ohne Sitemap müssen KI-Agenten Links manuell folgen. Seiten werden übersehen', fix: 'sitemap.xml generieren und in robots.txt referenzieren' })
   }
 
   // llms.txt vorhanden? (10%)
@@ -189,7 +189,7 @@ function scoreAuffindbarkeit(data: ScrapedData): DimensionScore {
     score += 50
     findings.push({ criterion: 'llms.txt vorhanden', passed: true, businessImpact: 'LLMs erhalten strukturierten Kontext über die Website', fix: '' })
   } else {
-    findings.push({ criterion: 'llms.txt vorhanden', passed: false, businessImpact: 'Keine llms.txt — KI-Modelle haben keinen kuratierten Überblick über die Website', fix: 'llms.txt im Root-Verzeichnis anlegen mit Kurzbeschreibung, Kernthemen und Kontaktdaten' })
+    findings.push({ criterion: 'llms.txt vorhanden', passed: false, businessImpact: 'Keine llms.txt. KI-Modelle haben keinen kuratierten Überblick über die Website', fix: 'llms.txt im Root-Verzeichnis anlegen mit Kurzbeschreibung, Kernthemen und Kontaktdaten' })
   }
 
   return { id: 'auffindbarkeit', name: 'Auffindbarkeit', score, weight: 0.20, findings }
@@ -211,7 +211,7 @@ function scoreInteraktivitaet(data: ScrapedData): DimensionScore {
     score += 50
     findings.push({ criterion: 'MCP/WebMCP Endpoint', passed: true, businessImpact: 'KI-Agenten können direkt mit der Website interagieren', fix: '' })
   } else {
-    findings.push({ criterion: 'MCP/WebMCP Endpoint', passed: false, businessImpact: 'Keine MCP-Integration — KI-Agenten können nur lesen, nicht handeln', fix: 'MCP-Server oder WebMCP-Endpoint implementieren für Agent-Interaktion' })
+    findings.push({ criterion: 'MCP/WebMCP Endpoint', passed: false, businessImpact: 'Keine MCP-Integration. KI-Agenten können nur lesen, nicht handeln', fix: 'MCP-Server oder WebMCP-Endpoint implementieren für Agent-Interaktion' })
   }
 
   // NLWeb Markup? (3%)
@@ -224,7 +224,7 @@ function scoreInteraktivitaet(data: ScrapedData): DimensionScore {
     score += 30
     findings.push({ criterion: 'NLWeb Markup', passed: true, businessImpact: 'Natürlichsprachliche Aktionen für KI-Agenten definiert', fix: '' })
   } else {
-    findings.push({ criterion: 'NLWeb Markup', passed: false, businessImpact: 'Keine NLWeb-Aktionen — KI-Agenten können keine natürlichsprachlichen Befehle ausführen', fix: 'NLWeb-Markup für häufige Nutzeraktionen hinzufügen' })
+    findings.push({ criterion: 'NLWeb Markup', passed: false, businessImpact: 'Keine NLWeb-Aktionen. KI-Agenten können keine natürlichsprachlichen Befehle ausführen', fix: 'NLWeb-Markup für häufige Nutzeraktionen hinzufügen' })
   }
 
   // Strukturierte Handlungs-Endpoints? (2%)
@@ -238,7 +238,7 @@ function scoreInteraktivitaet(data: ScrapedData): DimensionScore {
     score += 20
     findings.push({ criterion: 'Strukturierte API/Action Endpoints', passed: true, businessImpact: 'Programmierbare Schnittstellen für KI-Agenten erkennbar', fix: '' })
   } else {
-    findings.push({ criterion: 'Strukturierte API/Action Endpoints', passed: false, businessImpact: 'Keine erkennbaren API-Endpoints — KI-Agenten sind auf Scraping beschränkt', fix: 'REST API oder OpenAPI-Dokumentation bereitstellen' })
+    findings.push({ criterion: 'Strukturierte API/Action Endpoints', passed: false, businessImpact: 'Keine erkennbaren API-Endpoints. KI-Agenten sind auf Scraping beschränkt', fix: 'REST API oder OpenAPI-Dokumentation bereitstellen' })
   }
 
   return { id: 'interaktivitaet', name: 'Interaktivität', score, weight: 0.10, findings }

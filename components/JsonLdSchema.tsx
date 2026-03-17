@@ -25,7 +25,7 @@ export default function JsonLdSchema() {
         "name": "Was macht den Agent-Readiness Check einzigartig?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "In 20 Sekunden prüft der Scanner ob KI-Agenten auf deiner Restaurant-Website handeln können — nicht nur ob sie dich finden. Wir messen 5 Dimensionen: Zugang, Parsability, Entity-Vertrauen, Auffindbarkeit und Interaktivität. Kein Account, keine Agentur, kein Warten."
+          "text": "In 20 Sekunden prüft der Scanner ob KI-Agenten auf deiner Restaurant-Website handeln können, nicht nur ob sie dich finden. Wir messen 5 Dimensionen: Zugang, Parsability, Entity-Vertrauen, Auffindbarkeit und Interaktivität. Kein Account, keine Agentur, kein Warten."
         }
       },
       {
@@ -33,7 +33,7 @@ export default function JsonLdSchema() {
         "name": "Was ist Agent-Readiness für Restaurants?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Agent-Readiness misst, ob KI-Agenten (wie ChatGPT, Claude, Perplexity) deine Restaurant-Website nicht nur finden, sondern auch verstehen und darauf handeln können — Tische reservieren, Speisekarten lesen, Anfragen stellen. Restaurants die nicht Agent-Ready sind, verlieren zunehmend Gäste an Wettbewerber die es sind."
+          "text": "Agent-Readiness misst, ob KI-Agenten (wie ChatGPT, Claude, Perplexity) deine Restaurant-Website nicht nur finden, sondern auch verstehen und darauf handeln können: Tische reservieren, Speisekarten lesen, Anfragen stellen. Restaurants die nicht Agent-Ready sind, verlieren zunehmend Gäste an Wettbewerber die es sind."
         }
       },
       {
@@ -49,7 +49,7 @@ export default function JsonLdSchema() {
         "name": "Was zeigt der Agent-Readiness Score?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Der Score (0–100) zeigt wie bereit deine Restaurant-Website für die Agenten-Ökonomie ist. Unter 30 = kritisch (Agenten können nicht handeln), 31–60 = Verbesserungsbedarf, 61–85 = gut, über 85 = Agent-Ready. Zusätzlich bekommst du einen konkreten Aktionsplan."
+          "text": "Der Score (0-100) zeigt wie bereit deine Restaurant-Website für die Agenten-Ökonomie ist. Unter 30 = kritisch (Agenten können nicht handeln), 31-60 = Verbesserungsbedarf, 61-85 = gut, über 85 = Agent-Ready. Zusätzlich bekommst du einen konkreten Aktionsplan."
         }
       },
       {
@@ -57,7 +57,7 @@ export default function JsonLdSchema() {
         "name": "Brauche ich einen Account oder Installation?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nein. Der Agent-Readiness Check ist kostenlos, ohne Account und ohne Installation. URL eingeben, warten, Ergebnis lesen — DSGVO-konform und ohne Datenspeicherung."
+          "text": "Nein. Der Agent-Readiness Check ist kostenlos, ohne Account und ohne Installation. URL eingeben, warten, Ergebnis lesen. DSGVO-konform und ohne Datenspeicherung."
         }
       },
       {
@@ -65,12 +65,12 @@ export default function JsonLdSchema() {
         "name": "Für wen ist der Agent-Check relevant?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Für jeden Gastronomiebetrieb der Gäste gewinnen will: Restaurants, Cafés, Hotels, Catering-Unternehmen. Besonders wichtig für Betriebe mit Online-Reservierungen, Speisekarten oder Anfrage-Formularen — denn dort können Agenten direkt für deine Gäste handeln."
+          "text": "Für jeden Gastronomiebetrieb der Gäste gewinnen will: Restaurants, Cafés, Hotels, Catering-Unternehmen. Besonders wichtig für Betriebe mit Online-Reservierungen, Speisekarten oder Anfrage-Formularen, denn dort können Agenten direkt für deine Gäste handeln."
         }
       },
       {
         "@type": "Question",
-        "name": "Was ist WebMCP — und warum verliere ich Reservierungen ohne es?",
+        "name": "Was ist WebMCP und warum verliere ich Reservierungen ohne es?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "KI-Agenten wie ChatGPT oder Perplexity können heute Restaurant-Websites lesen, aber noch nicht eigenständig handeln. WebMCP ist der neue Standard der das ändert: Er gibt Agenten eine strukturierte Schnittstelle um Reservierungen, Bestellungen oder Anfragen direkt abzuschließen, ohne dass ein Gast klickt. Restaurant-Websites ohne WebMCP-Unterstützung werden von Agenten übersprungen und leiten Gäste automatisch zur Konkurrenz weiter."
