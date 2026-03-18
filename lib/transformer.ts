@@ -110,7 +110,7 @@ export async function generateActionPlan(
   scrapedContent: string,
   score: SlipstreamScore
 ): Promise<ActionPlan> {
-  const client = new Anthropic()
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY?.trim() })
 
   const message = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
