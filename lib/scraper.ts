@@ -126,7 +126,7 @@ export async function scrapeUrl(inputUrl: string): Promise<ScrapedData> {
         try {
           const headers: Record<string, string> = {
             'Accept': 'text/plain',
-            'Authorization': `Bearer ${process.env.JINA_API_KEY}`,
+            'Authorization': `Bearer ${process.env.JINA_API_KEY!.trim()}`,
           }
           const res = await fetchWithTimeout(`https://r.jina.ai/${targetUrl}`, { headers }, 8000)
           if (res.ok) return res
