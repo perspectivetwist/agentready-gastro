@@ -14,23 +14,33 @@ const loadingSteps = [
 
 function LoadingState({ step }: { step: number }) {
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex items-center gap-3">
-        <div className="w-4 h-4 border-2 border-yellow-300 border-t-transparent rounded-full animate-spin" />
+    <div className="flex flex-col items-center gap-6">
+      {/* Video loop */}
+      <video
+        src="/loading-anim.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-64 h-64 object-cover pointer-events-none"
+        style={{ mixBlendMode: 'screen', WebkitMaskImage: 'radial-gradient(ellipse at center, black 35%, transparent 70%)', maskImage: 'radial-gradient(ellipse at center, black 35%, transparent 70%)' }}
+        ref={(el) => { if (el) el.playbackRate = 0.7 }}
+      />
+
+      <div className="flex flex-col items-center gap-3">
         <span className="text-sm text-yellow-200 font-medium">
           {loadingSteps[step]}
         </span>
-      </div>
-      {/* Progress dots */}
-      <div className="flex gap-1.5">
-        {loadingSteps.map((_, i) => (
-          <div
-            key={i}
-            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-              i <= step ? 'bg-yellow-300' : 'bg-white/20'
-            }`}
-          />
-        ))}
+        <div className="flex gap-1.5">
+          {loadingSteps.map((_, i) => (
+            <div
+              key={i}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i <= step ? 'bg-yellow-300' : 'bg-white/20'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
