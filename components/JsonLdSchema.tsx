@@ -30,6 +30,14 @@ export default function JsonLdSchema() {
       },
       {
         "@type": "Question",
+        "name": "Warum gibt es den Agent-Readiness Scanner und warum jetzt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weil KI-Agenten bereits Tische reservieren, Speisekarten vergleichen und Restaurants empfehlen, und die meisten Restaurant-Websites dafür nicht bereit sind. ChatGPT, Perplexity und Google handeln zunehmend autonom im Auftrag von Nutzern. Wer technisch nicht zugänglich ist, wird übersprungen. Bis 2028 werden 15% aller Kaufentscheidungen von KI-Agenten getroffen (Gartner 2025). Nur 0,027% aller Websites haben überhaupt einen KI-Agent-Einstiegspunkt (IEEE Symposium 2026). llms.txt als neuer Standard für Agent-Readiness: noch unter 1% der Websites haben ihn. Der Scanner zeigt in Sekunden ob ein KI-Agent auf deiner Restaurant-Website tatsächlich handeln kann oder scheitert bevor er es versucht."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Was ist Agent-Readiness für Restaurants?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -73,7 +81,7 @@ export default function JsonLdSchema() {
         "name": "Was ist WebMCP und warum verliere ich Reservierungen ohne es?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "KI-Agenten wie ChatGPT oder Perplexity können heute Restaurant-Websites lesen, aber noch nicht eigenständig handeln. WebMCP ist der neue Standard der das ändert: Er gibt Agenten eine strukturierte Schnittstelle um Reservierungen, Bestellungen oder Anfragen direkt abzuschließen, ohne dass ein Gast klickt. Restaurant-Websites ohne WebMCP-Unterstützung werden von Agenten übersprungen und leiten Gäste automatisch zur Konkurrenz weiter."
+          "text": "KI-Agenten wie ChatGPT oder Perplexity können heute Restaurant-Websites lesen, aber noch nicht eigenständig handeln. WebMCP ist der neue Standard der das ändert: Er gibt Agenten eine strukturierte Schnittstelle um Reservierungen, Bestellungen oder Anfragen direkt abzuschließen, ohne dass ein Gast klickt. Restaurant-Websites ohne WebMCP-Unterstützung werden von Agenten übersprungen und leiten Gäste automatisch zur Konkurrenz weiter. Der Scanner misst ob deine Website bereit ist und zeigt dir im Aktionsplan konkret wie du WebMCP implementierst, bevor deine Konkurrenz es tut."
         }
       }
     ]
