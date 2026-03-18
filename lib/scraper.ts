@@ -1,6 +1,11 @@
 // Slipstream Scraper — Jina.ai Reader API + robots.txt + HTTP Headers
 // Liefert alle Rohdaten die der Scorer (Task 1.3) braucht
 
+function cleanEnvKey(key: string | undefined): string | undefined {
+  if (!key) return undefined
+  return key.replace(/^["']+|["']+$/g, '').replace(/\\n/g, '').trim()
+}
+
 export interface ScrapedData {
   url: string
   markdown: string          // Jina.ai Markdown output
@@ -115,7 +120,7 @@ export async function scrapeUrl(inputUrl: string): Promise<ScrapedData> {
 
   // Jina Scraping mit Auth + HTTP Fallbacks
   async function fetchJinaWithFallbacks(): Promise<Response> {
-    const hasKey = !!process.env.JINA_API_KEY
+    const hasKey = !!cleanEnvKey(process.env.JINA_API_KEY)
     const urls = [url]
     if (url.startsWith('https://')) {
       urls.push(url.replace('https://', 'http://'))
@@ -126,7 +131,7 @@ export async function scrapeUrl(inputUrl: string): Promise<ScrapedData> {
         try {
           const headers: Record<string, string> = {
             'Accept': 'text/plain',
-            'Authorization': `Bearer ${process.env.JINA_API_KEY!.trim()}`,
+            'Authorization': `Bearer ${cleanEnvKey(process.env.JINA_API_KEY)!}`,
           }
           const res = await fetchWithTimeout(`https://r.jina.ai/${targetUrl}`, { headers }, 8000)
           if (res.ok) return res

@@ -4,6 +4,11 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { SlipstreamScore } from './scorer'
 
+function cleanApiKey(key: string | undefined): string | undefined {
+  if (!key) return undefined
+  return key.replace(/^["']+|["']+$/g, '').replace(/\\n/g, '').trim()
+}
+
 export interface ActionItem {
   dimension: string
   priority: 'high' | 'medium' | 'low'
@@ -110,7 +115,7 @@ export async function generateActionPlan(
   scrapedContent: string,
   score: SlipstreamScore
 ): Promise<ActionPlan> {
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY?.trim() })
+  const client = new Anthropic({ apiKey: cleanApiKey(process.env.ANTHROPIC_API_KEY) })
 
   const message = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
