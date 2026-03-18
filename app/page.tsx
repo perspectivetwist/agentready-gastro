@@ -49,7 +49,7 @@ export default function Home() {
       </div>
 
       {/* DEFINITION */}
-      <section className="max-w-2xl mx-auto px-4 py-6 text-center">
+      <section className="max-w-2xl mx-auto px-4 pt-2 pb-6 text-center">
         <p className="text-sm text-gray-400 leading-relaxed">
           Slipstream pr&uuml;ft kostenlos ob KI-Agenten in deinem Restaurant online bestellen und reservieren k&ouml;nnen. F&uuml;r Restaurants, Lieferdienste und Cateringbetriebe.
         </p>
