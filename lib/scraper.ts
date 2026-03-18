@@ -113,56 +113,65 @@ export async function scrapeUrl(inputUrl: string): Promise<ScrapedData> {
   const baseUrl = getBaseUrl(url)
   const isHttps = url.startsWith('https://')
 
-  // Jina Headers
-  const jinaHeaders: Record<string, string> = { 'Accept': 'text/plain' }
-  if (process.env.JINA_API_KEY) {
-    jinaHeaders['Authorization'] = `Bearer ${process.env.JINA_API_KEY}`
+  // Jina Scraping mit Auth + HTTP Fallbacks
+  async function fetchJinaWithFallbacks(): Promise<Response> {
+    const hasKey = !!process.env.JINA_API_KEY
+    const urls = [url]
+    if (url.startsWith('https://')) {
+      urls.push(url.replace('https://', 'http://'))
+    }
+
+    if (hasKey) {
+      for (const targetUrl of urls) {
+        try {
+          const headers: Record<string, string> = {
+            'Accept': 'text/plain',
+            'Authorization': `Bearer ${process.env.JINA_API_KEY}`,
+          }
+          const res = await fetchWithTimeout(`https://r.jina.ai/${targetUrl}`, { headers }, 8000)
+          if (res.ok) return res
+          if (res.status === 401) break
+          if (res.status === 422) continue
+          return res
+        } catch {
+          break
+        }
+      }
+    }
+
+    for (const targetUrl of urls) {
+      try {
+        const res = await fetchWithTimeout(`https://r.jina.ai/${targetUrl}`, {
+          headers: { 'Accept': 'text/plain' },
+        }, 20000)
+        if (res.ok) return res
+        if (res.status === 422) continue
+        return res
+      } catch (err) {
+        if (targetUrl === urls[urls.length - 1]) throw err
+        continue
+      }
+    }
+    throw new Error('Website konnte nicht geladen werden')
   }
 
   // Parallel: Jina scrape + robots.txt + HTTP Headers + sitemap + llms.txt
   const [jinaResponse, robotsTxt, httpHeaders, sitemapExists, llmsTxtExists] = await Promise.all([
-    fetchWithTimeout(`https://r.jina.ai/${url}`, { headers: jinaHeaders }, 20000),
+    fetchJinaWithFallbacks(),
     fetchRobotsTxt(baseUrl),
     fetchHttpHeaders(url),
     checkUrlExists(`${baseUrl}/sitemap.xml`),
     checkUrlExists(`${baseUrl}/llms.txt`),
   ])
 
-  let finalJinaResponse = jinaResponse
-
-  // Auth-Fallback: Wenn 401 (ungültiger Key), ohne Auth-Header versuchen
-  if (!finalJinaResponse.ok && finalJinaResponse.status === 401 && process.env.JINA_API_KEY) {
-    finalJinaResponse = await fetchWithTimeout(`https://r.jina.ai/${url}`, {
-      headers: { 'Accept': 'text/plain' },
-    }, 20000)
-  }
-
-  // HTTPS→HTTP Fallback: Wenn Jina 422 gibt (SSL-Fehler), mit http:// versuchen
-  if (!finalJinaResponse.ok && finalJinaResponse.status === 422 && url.startsWith('https://')) {
-    const httpUrl = url.replace('https://', 'http://')
-    const fallbackHeaders: Record<string, string> = { 'Accept': 'text/plain' }
-    if (process.env.JINA_API_KEY) {
-      fallbackHeaders['Authorization'] = `Bearer ${process.env.JINA_API_KEY}`
-    }
-    finalJinaResponse = await fetchWithTimeout(`https://r.jina.ai/${httpUrl}`, { headers: fallbackHeaders }, 20000)
-    // Auth + HTTP Fallback kombiniert
-    if (!finalJinaResponse.ok && finalJinaResponse.status === 401 && process.env.JINA_API_KEY) {
-      finalJinaResponse = await fetchWithTimeout(`https://r.jina.ai/${httpUrl}`, {
-        headers: { 'Accept': 'text/plain' },
-      }, 20000)
-    }
-  }
-
-  if (!finalJinaResponse.ok) {
-    if (finalJinaResponse.status === 429) {
+  if (!jinaResponse.ok) {
+    if (jinaResponse.status === 429) {
       throw new Error('Rate Limit erreicht. Bitte warte einen Moment.')
     }
-    throw new Error(`Website konnte nicht geladen werden (Status ${finalJinaResponse.status})`)
+    throw new Error(`Website konnte nicht geladen werden (Status ${jinaResponse.status})`)
   }
 
-  const jinaResponseFinal = finalJinaResponse
-
-  const markdown = await jinaResponseFinal.text()
+  const markdown = await jinaResponse.text()
 
   if (!markdown || markdown.trim().length < 50) {
     throw new Error('Website hat keinen verwertbaren Inhalt zurückgegeben')
