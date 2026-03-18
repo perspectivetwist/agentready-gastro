@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { scrapeUrl } from '@/lib/scraper'
 import { calculateScore } from '@/lib/scorer'
 import { generateActionPlan } from '@/lib/transformer'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, isCrawlerAuthorized } from '@/lib/rate-limit'
 import { getScoreBand, getScoreBandInfo } from '@/lib/score-bands'
 import { pingIndexNow } from '@/lib/indexnow'
 
@@ -23,16 +23,22 @@ function isInternalUrl(url: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate Limiting
+    // Crawler-Bypass oder Rate Limiting
+    const crawlerSecret = request.headers.get('x-crawler-secret')
+    const skipRateLimit = isCrawlerAuthorized(crawlerSecret)
+
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
                request.headers.get('x-real-ip') ||
                'unknown'
-    const rateCheck = checkRateLimit(ip)
-    if (!rateCheck.allowed) {
-      return NextResponse.json(
-        { error: 'Rate Limit erreicht. Maximal 5 Scans pro Stunde.' },
-        { status: 429 }
-      )
+
+    if (!skipRateLimit) {
+      const rateCheck = checkRateLimit(ip)
+      if (!rateCheck.allowed) {
+        return NextResponse.json(
+          { error: 'Rate Limit erreicht. Maximal 5 Scans pro Stunde.' },
+          { status: 429 }
+        )
+      }
     }
 
     // Input parsen
