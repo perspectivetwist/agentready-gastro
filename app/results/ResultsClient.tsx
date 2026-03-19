@@ -86,7 +86,6 @@ function ResultsContent() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-300 mx-auto mb-4" />
           <p className="text-lg font-light text-gray-300">Analysiere Website...</p>
-          <p className="text-sm font-light text-gray-500 mt-1">Das kann bis zu 30 Sekunden dauern</p>
         </div>
       </main>
     )

@@ -125,7 +125,6 @@ function ScanningContent() {
     <main className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <LoadingState step={loadingStep} />
-        <p className="text-sm font-light text-gray-500 mt-4">Das kann bis zu 30 Sekunden dauern</p>
       </div>
     </main>
   )
