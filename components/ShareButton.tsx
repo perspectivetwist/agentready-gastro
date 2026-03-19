@@ -9,7 +9,8 @@ interface Props {
 export default function ShareButton({ score, resultUrl }: Props) {
   const [copied, setCopied] = useState(false)
 
-  const shareText = `Ich hab gerade gecheckt ob KI-Agenten meinen Betrieb nutzen können: ${score}/100. Können KI-Agenten bei dir überhaupt buchen oder anfragen? Kostenlos testen: ${resultUrl}`
+  const baseUrl = 'https://agentready-gastro.vercel.app'
+  const shareText = `Ich hab gerade gecheckt ob KI-Agenten meinen Betrieb nutzen können: ${score}/100. Können KI-Agenten bei dir überhaupt buchen oder anfragen? Kostenlos testen: ${baseUrl}`
 
   function handleWhatsApp() {
     window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank')
