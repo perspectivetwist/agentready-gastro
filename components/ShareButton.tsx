@@ -3,29 +3,41 @@ import { useState } from 'react'
 
 interface Props {
   score: number
-  url: string
+  resultUrl: string
 }
 
-export default function ShareButton({ score, url }: Props) {
+export default function ShareButton({ score, resultUrl }: Props) {
   const [copied, setCopied] = useState(false)
 
-  function handleCopy() {
-    const domain = new URL(url).hostname
-    const emoji = score >= 86 ? '\ud83d\udfe2' : score >= 61 ? '\ud83d\udfe1' : score >= 31 ? '\ud83d\udfe0' : '\ud83d\udd34'
-    const text = `${emoji} Mein Agent-Readiness Score: ${score}/100\n\nWebsite: ${domain}\n\nK\u00f6nnen KI-Agenten auf deiner Website handeln?\n\ud83d\udc49 Kostenlos testen: https://agentready-transformer.vercel.app`
+  const shareText = `Ich hab gerade gecheckt ob KI-Agenten meinen Betrieb nutzen können: ${score}/100. Können KI-Agenten bei dir überhaupt buchen oder anfragen? Kostenlos testen: ${resultUrl}`
 
-    navigator.clipboard.writeText(text).then(() => {
+  function handleWhatsApp() {
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank')
+  }
+
+  function handleCopy() {
+    navigator.clipboard.writeText(resultUrl).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })
   }
 
   return (
-    <button
-      onClick={handleCopy}
-      className="w-full h-11 border border-white/10 text-gray-400 font-light rounded-xl hover:bg-white/5 transition-colors text-sm"
-    >
-      {copied ? '\u2713 Kopiert!' : '\ud83d\udce4 Score teilen'}
-    </button>
+    <div className="grid grid-cols-2 gap-3 w-full">
+      <button
+        onClick={handleWhatsApp}
+        className="h-11 rounded-xl font-semibold text-sm text-white transition-opacity hover:opacity-90"
+        style={{ backgroundColor: '#25D366' }}
+      >
+        Via WhatsApp teilen
+      </button>
+      <button
+        onClick={handleCopy}
+        className="h-11 rounded-xl font-semibold text-sm transition-opacity hover:opacity-90"
+        style={{ backgroundColor: '#facc15', color: '#000' }}
+      >
+        {copied ? 'Kopiert!' : 'Link kopieren'}
+      </button>
+    </div>
   )
 }
