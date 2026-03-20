@@ -38,9 +38,7 @@ export interface ActionPlan {
 }
 
 export interface KiSummary {
-  sichtbarkeit: string
-  nutzbarkeit: string
-  sicherheit: string
+  zusammenfassung: string
 }
 
 export interface SlipstreamResult {

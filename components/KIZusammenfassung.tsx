@@ -1,66 +1,47 @@
-import { KiSummary } from '@/types/slipstream'
+'use client'
 
-interface KIZusammenfassungProps {
-  kiSummary: KiSummary | undefined
+import { KiSummary } from '@/lib/ki-summary'
+import BlurWrapper from './BlurWrapper'
+
+interface Props {
+  kiSummary: KiSummary | null
+  isUnlocked: boolean
 }
 
-export default function KIZusammenfassung({ kiSummary }: KIZusammenfassungProps) {
-  if (!kiSummary) return null
-
+function FlowIcon() {
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-white text-center">
-        So sieht KI dein Restaurant heute
-      </h2>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 12h4m0 0l-2-2m2 2l-2 2" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="10" y="8" width="4" height="8" rx="1" stroke="#10B981" strokeWidth="2"/>
+      <path d="M16 12h4m0 0l-2-2m2 2l-2 2" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
 
-      <div className="space-y-3">
-        {/* Sichtbarkeit */}
-        <div className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-5">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 mt-0.5">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-amber-400 mb-1">Wie KI dich heute sieht</h3>
-              <p className="text-sm font-light text-gray-300 leading-relaxed">{kiSummary.sichtbarkeit}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Nutzbarkeit */}
-        <div className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-5">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 mt-0.5">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="13 17 18 12 13 7" />
-                <polyline points="6 17 11 12 6 7" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-emerald-400 mb-1">Was KI-Agenten bei dir tun k&ouml;nnen</h3>
-              <p className="text-sm font-light text-gray-300 leading-relaxed">{kiSummary.nutzbarkeit}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Sicherheit */}
-        <div className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-5">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 mt-0.5">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-violet-400 mb-1">Was unkontrolliert passiert</h3>
-              <p className="text-sm font-light text-gray-300 leading-relaxed">{kiSummary.sicherheit}</p>
-            </div>
-          </div>
-        </div>
+function SummaryCard({ kiSummary }: { kiSummary: KiSummary }) {
+  return (
+    <div className="rounded-2xl p-4 sm:p-6 bg-white/5 border border-white/10 backdrop-blur-sm">
+      <div className="flex items-center gap-3 mb-3">
+        <FlowIcon />
+        <h2 className="font-semibold text-white">So sieht KI dein Restaurant heute</h2>
       </div>
+      <p className="text-sm font-light text-gray-300 leading-relaxed">
+        {kiSummary.zusammenfassung}
+      </p>
     </div>
   )
+}
+
+export default function KIZusammenfassung({ kiSummary, isUnlocked }: Props) {
+  if (!kiSummary) return null
+
+  if (!isUnlocked) {
+    return (
+      <BlurWrapper bgColor="#0a0a0f">
+        <SummaryCard kiSummary={kiSummary} />
+      </BlurWrapper>
+    )
+  }
+
+  return <SummaryCard kiSummary={kiSummary} />
 }

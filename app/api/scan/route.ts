@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { scrapeUrl } from '@/lib/scraper'
 import { calculateScore } from '@/lib/scorer'
-import { generateActionPlan, generateKiSummary } from '@/lib/transformer'
+import { generateActionPlan } from '@/lib/transformer'
+import { generateKiSummary } from '@/lib/ki-summary'
 import { checkRateLimit, isCrawlerAuthorized } from '@/lib/rate-limit'
 import { getScoreBand, getScoreBandInfo } from '@/lib/score-bands'
 import { pingIndexNow } from '@/lib/indexnow'
@@ -73,24 +74,25 @@ export async function POST(request: NextRequest) {
     const score = calculateScore(scraped)
 
     let actionPlan = undefined
-    let kiSummary = undefined
     if (includeActionPlan) {
       try {
         actionPlan = await generateActionPlan(scraped.url, scraped.markdown, score)
       } catch (err) {
         console.error('Transformer error (non-fatal):', err)
       }
-
-      if (actionPlan) {
-        try {
-          kiSummary = await generateKiSummary(scraped.url, actionPlan)
-        } catch (err) {
-          console.error('KI-Zusammenfassung error (non-fatal):', err)
-        }
-      }
     }
 
     const bandInfo = getScoreBandInfo(score.totalScore)
+
+    // KI-Zusammenfassung generieren (non-fatal)
+    let kiSummary = undefined
+    if (actionPlan) {
+      try {
+        kiSummary = await generateKiSummary(scraped.url, actionPlan.actions)
+      } catch (err) {
+        console.error('KI-Summary error (non-fatal):', err)
+      }
+    }
 
     // IndexNow: Result-URL an Bing pushen (fire-and-forget)
     pingIndexNow(scraped.url)
