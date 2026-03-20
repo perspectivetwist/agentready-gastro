@@ -3,6 +3,7 @@
 
 import Anthropic from '@anthropic-ai/sdk'
 import { SlipstreamScore } from './scorer'
+import { ActionPlan as ActionPlanType, KiSummary } from '@/types/slipstream'
 
 function cleanApiKey(key: string | undefined): string | undefined {
   if (!key) return undefined
@@ -148,4 +149,81 @@ export async function generateActionPlan(
   }
 
   return validateOutput(parsed)
+}
+
+// KI-Zusammenfassung: 3 Felder (sichtbarkeit, nutzbarkeit, sicherheit)
+export async function generateKiSummary(
+  url: string,
+  actionPlan: ActionPlanType
+): Promise<KiSummary> {
+  const client = new Anthropic({ apiKey: cleanApiKey(process.env.ANTHROPIC_API_KEY) })
+
+  // Befunde nach Dimension gruppieren
+  const befundeByDimension: Record<string, string[]> = {}
+  for (const action of actionPlan.actions) {
+    if (!befundeByDimension[action.dimension]) {
+      befundeByDimension[action.dimension] = []
+    }
+    befundeByDimension[action.dimension].push(action.action)
+  }
+
+  const befundeText = Object.entries(befundeByDimension)
+    .map(([dim, actions]) => `${dim}:\n${actions.map(a => `- ${a}`).join('\n')}`)
+    .join('\n\n')
+
+  const message = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 800,
+    system: 'Du bist ein KI-Berater der Restaurantbesitzern erklärt, wie KI-Systeme ihr Restaurant heute wahrnehmen. Schreibe in einfacher Business-Sprache, kein Jargon, kein Markdown. Jedes Feld: 2-3 Sätze. Der Ton ist sachlich, aber leicht beunruhigend — der Leser soll verstehen, dass Handlungsbedarf besteht. Antworte ausschließlich mit validem JSON.',
+    messages: [
+      {
+        role: 'user',
+        content: `Restaurant-Website: ${sanitizeContent(url)}
+
+Befunde aus der Analyse:
+${sanitizeContent(befundeText)}
+
+Gesamteinschätzung: ${sanitizeContent(actionPlan.summary)}
+
+Erstelle eine KI-Zusammenfassung mit diesem exakten JSON-Format:
+{
+  "sichtbarkeit": "Wie sehen KI-Systeme (ChatGPT, Google AI, Siri) dieses Restaurant heute? Finden sie es, verstehen sie das Angebot? 2-3 Sätze.",
+  "nutzbarkeit": "Was können KI-Agenten konkret für Gäste tun? Können sie reservieren, Speisekarten lesen, Öffnungszeiten nennen? 2-3 Sätze.",
+  "sicherheit": "Was passiert unkontrolliert? Welche falschen oder veralteten Infos könnten KI-Systeme über das Restaurant verbreiten? 2-3 Sätze."
+}
+
+Regeln:
+- Beziehe dich konkret auf die Befunde, nicht allgemein
+- Sprache: einfach, direkt, wie ein Berater der mit dem Inhaber spricht
+- Kein Markdown, keine Aufzählungen, nur Fließtext
+- Antworte NUR mit dem JSON`,
+      },
+    ],
+  })
+
+  const responseText = message.content
+    .filter((block): block is Anthropic.TextBlock => block.type === 'text')
+    .map(block => block.text)
+    .join('')
+
+  const jsonMatch = responseText.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) {
+    throw new Error('KI-Zusammenfassung: kein valides JSON')
+  }
+
+  const parsed = JSON.parse(jsonMatch[0]) as KiSummary
+
+  if (!parsed.sichtbarkeit || !parsed.nutzbarkeit || !parsed.sicherheit) {
+    throw new Error('KI-Zusammenfassung: Pflichtfelder fehlen')
+  }
+
+  // Output validieren (XSS-Schutz)
+  const cleanString = (s: string): string =>
+    s.replace(/<[^>]+>/g, '').replace(/```[\s\S]*?```/g, '').trim()
+
+  return {
+    sichtbarkeit: cleanString(parsed.sichtbarkeit),
+    nutzbarkeit: cleanString(parsed.nutzbarkeit),
+    sicherheit: cleanString(parsed.sicherheit),
+  }
 }

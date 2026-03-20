@@ -37,6 +37,12 @@ export interface ActionPlan {
   actions: ActionItem[]
 }
 
+export interface KiSummary {
+  sichtbarkeit: string
+  nutzbarkeit: string
+  sicherheit: string
+}
+
 export interface SlipstreamResult {
   url: string
   totalScore: number
@@ -45,5 +51,6 @@ export interface SlipstreamResult {
   dimensions: DimensionScore[]
   industry: string
   actionPlan?: ActionPlan
+  kiSummary?: KiSummary
   scannedAt: string
 }

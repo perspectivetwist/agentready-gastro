@@ -10,6 +10,8 @@ import RankingCard from '@/components/RankingCard'
 import EmailGate from '@/components/EmailGate'
 import CrossSell from '@/components/CrossSell'
 import ShareButton from '@/components/ShareButton'
+import KIZusammenfassung from '@/components/KIZusammenfassung'
+import BlurWrapper from '@/components/BlurWrapper'
 import { trackScanComplete, trackEmailGate } from '@/lib/gtag'
 
 function ResultsContent() {
@@ -128,6 +130,16 @@ function ResultsContent() {
         />
 
         <DimensionBars dimensions={result.dimensions} />
+
+        {result.kiSummary && (
+          isUnlocked ? (
+            <KIZusammenfassung kiSummary={result.kiSummary} />
+          ) : (
+            <BlurWrapper bgColor="#0a0a0f">
+              <KIZusammenfassung kiSummary={result.kiSummary} />
+            </BlurWrapper>
+          )
+        )}
 
         {result.actionPlan && (
           <ActionPlan actionPlan={result.actionPlan} isUnlocked={isUnlocked} />

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { scrapeUrl } from '@/lib/scraper'
 import { calculateScore } from '@/lib/scorer'
-import { generateActionPlan } from '@/lib/transformer'
+import { generateActionPlan, generateKiSummary } from '@/lib/transformer'
 import { checkRateLimit, isCrawlerAuthorized } from '@/lib/rate-limit'
 import { getScoreBand, getScoreBandInfo } from '@/lib/score-bands'
 import { pingIndexNow } from '@/lib/indexnow'
@@ -73,12 +73,20 @@ export async function POST(request: NextRequest) {
     const score = calculateScore(scraped)
 
     let actionPlan = undefined
+    let kiSummary = undefined
     if (includeActionPlan) {
       try {
         actionPlan = await generateActionPlan(scraped.url, scraped.markdown, score)
       } catch (err) {
         console.error('Transformer error (non-fatal):', err)
-        // Aktionsplan ist optional — Score wird trotzdem geliefert
+      }
+
+      if (actionPlan) {
+        try {
+          kiSummary = await generateKiSummary(scraped.url, actionPlan)
+        } catch (err) {
+          console.error('KI-Zusammenfassung error (non-fatal):', err)
+        }
       }
     }
 
@@ -95,6 +103,7 @@ export async function POST(request: NextRequest) {
       dimensions: score.dimensions,
       industry: actionPlan?.industry || 'Websites allgemein',
       actionPlan,
+      kiSummary,
       scannedAt: new Date().toISOString(),
     })
   } catch (err) {
