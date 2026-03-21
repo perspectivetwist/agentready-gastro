@@ -11,9 +11,9 @@ interface Props {
 function FlowIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 12h4m0 0l-2-2m2 2l-2 2" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <rect x="10" y="8" width="4" height="8" rx="1" stroke="#10B981" strokeWidth="2"/>
-      <path d="M16 12h4m0 0l-2-2m2 2l-2 2" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M4 12h4m0 0l-2-2m2 2l-2 2" stroke="#FFE600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="10" y="8" width="4" height="8" rx="1" stroke="#FFE600" strokeWidth="2"/>
+      <path d="M16 12h4m0 0l-2-2m2 2l-2 2" stroke="#FFE600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
 }
