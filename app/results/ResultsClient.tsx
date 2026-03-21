@@ -163,7 +163,7 @@ function ResultsContent() {
       {!isUnlocked && (
         <EmailGate
           primaryColor="#facc15"
-          scannerSource="Slipstream"
+          scannerSource="gastro-slipstream"
           url={decodeURIComponent(url)}
           onUnlock={handleUnlock}
         />
