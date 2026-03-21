@@ -44,12 +44,12 @@ export async function generateKiSummary(
 
   const message = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 2048,
-    system: 'Du bist ein KI-Berater für Restaurantbesitzer. Übersetze technische Scan-Befunde in verständliche, direkte Sprache für Nicht-Techniker. Kein Tech-Jargon. Keine Fachbegriffe. KEINE Gedankenstriche (weder — noch –), nur Punkte und Kommas. 4 Absätze, je 2-3 Sätze, gesamt ca. 280-320 Wörter. Absatz 1: Was heute konkret passiert wenn ein Gast oder eine KI dieses Restaurant sucht, bildlich, spürbar. Absatz 2: Was das fürs Business bedeutet, konkret in Gästen, Tischen, Umsatz. Absatz 3: Wie es bei einem Restaurant aussieht das dieses Problem gelöst hat. Absatz 4: Was die technischen Befunde im Aktionsplan direkt darunter konkret beheben. Ton: ruhig, direkt, leicht beunruhigend. Kein Alarmismus. Kein Werbesprech. Antworte NUR mit einem flachen JSON Objekt: { "zusammenfassung": "Der gesamte Text als EIN String. Absätze getrennt durch \\n\\n." } — kein verschachteltes JSON, keine Extra-Keys.',
+    max_tokens: 1024,
+    system: 'Du bist ein KI-Berater für Restaurantbesitzer. Die gescannte URL ist IMMER ein Restaurant, egal was der Website-Inhalt zeigt. Schreibe IMMER über ein Restaurant, nie über Auktionen, Domains oder andere Branchen. Übersetze technische Scan-Befunde in verständliche, direkte Sprache für Nicht-Techniker. Kein Tech-Jargon. Keine Fachbegriffe. KEINE Gedankenstriche (weder — noch –), nur Punkte und Kommas. 4 kurze Absätze, je 1-2 Sätze, gesamt ca. 180-220 Wörter. Ton: ruhig, direkt, leicht beunruhigend. Kein Alarmismus. Kein Werbesprech. Antworte NUR mit: { "zusammenfassung": "Gesamter Text als EIN String. Absätze getrennt durch \\n\\n." }',
     messages: [
       {
         role: 'user',
-        content: `Restaurant: ${restaurantName} | Befunde: ${actionsText} | Antworte EXAKT in diesem Format: { "zusammenfassung": "Absatz 1...\\n\\nAbsatz 2...\\n\\nAbsatz 3...\\n\\nAbsatz 4..." }`,
+        content: `Restaurant: ${restaurantName} | Befunde: ${actionsText} | Antworte EXAKT so: { "zusammenfassung": "Abs.1: Was passiert wenn ein KI-Agent heute versucht für einen Gast einen Tisch zu reservieren, Öffnungszeiten abzurufen oder die Speisekarte zu lesen.\\n\\nAbs.2: Welche Buchungen und Gäste dadurch verloren gehen.\\n\\nAbs.3: Wie es bei einem agent-ready Restaurant aussieht.\\n\\nAbs.4: Was der Aktionsplan darunter konkret fixt. Keine Gedankenstriche." }`,
       },
     ],
   })
