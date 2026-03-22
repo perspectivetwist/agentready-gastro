@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Scan in Notion loggen (fire-and-forget)
-    const dimStr = Object.entries(score.dimensions).map(([k, v]) => `${k}: ${v}`).join(', ')
+    const dimStr = score.dimensions.map((d: { name: string; score: number }) => `${d.name}: ${d.score}`).join(', ')
     logScan(scraped.url, score.totalScore, dimStr)
 
     // IndexNow: Result-URL an Bing pushen (fire-and-forget)
