@@ -6,6 +6,7 @@ import { generateKiSummary } from '@/lib/ki-summary'
 import { checkRateLimit, isCrawlerAuthorized } from '@/lib/rate-limit'
 import { getScoreBand, getScoreBandInfo } from '@/lib/score-bands'
 import { pingIndexNow } from '@/lib/indexnow'
+import { logScan } from '@/lib/notion'
 
 const MAX_URL_LENGTH = 500
 const INTERNAL_IP_PATTERNS = [
@@ -93,6 +94,10 @@ export async function POST(request: NextRequest) {
         console.error('KI-Summary error (non-fatal):', err)
       }
     }
+
+    // Scan in Notion loggen (fire-and-forget)
+    const dimStr = Object.entries(score.dimensions).map(([k, v]) => `${k}: ${v}`).join(', ')
+    logScan(scraped.url, score.totalScore, dimStr)
 
     // IndexNow: Result-URL an Bing pushen (fire-and-forget)
     pingIndexNow(scraped.url)
