@@ -8,10 +8,10 @@ export default function Datenschutz() {
           <section>
             <h2 className="text-white font-medium mb-2">Verantwortlicher</h2>
             <p>
-              Pachyon UG<br />
+              AI-SHIFT-DRIFT<br />
               Berliner Stra&szlig;e 124<br />
               13187 Berlin<br />
-              E-Mail: maxgeissinger@gmail.com
+              E-Mail: asd.gastronomie@gmail.com
             </p>
           </section>
 
@@ -56,7 +56,7 @@ export default function Datenschutz() {
               k&ouml;nnen Sie Ihre lokal gespeicherten Daten jederzeit &uuml;ber die Browser-Einstellungen l&ouml;schen.
             </p>
             <p className="mt-2">
-              Bei Fragen wenden Sie sich an: maxgeissinger@gmail.com
+              Bei Fragen wenden Sie sich an: asd.gastronomie@gmail.com
             </p>
           </section>
         </div>
