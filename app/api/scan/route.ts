@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
                'unknown'
 
     if (!skipRateLimit) {
-      const rateCheck = checkRateLimit(ip)
+      const rateCheck = await checkRateLimit(ip)
       if (!rateCheck.allowed) {
         return NextResponse.json(
           { error: 'Rate Limit erreicht. Maximal 5 Scans pro Stunde.' },
