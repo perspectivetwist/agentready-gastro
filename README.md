@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agent-Readiness Scanner — Kostenloser KI-Agent-Check für Gastronomie
 
-## Getting Started
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://agentready-gastro.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+## Was macht dieses Tool?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Der Agent-Readiness Scanner prüft, ob **KI-Agenten** bei deinem Restaurant reservieren, bestellen und bezahlen können. AI Agents sind die nächste Stufe nach Chatbots — sie handeln autonom im Auftrag von Gästen.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Der Scanner analysiert:
+- **Buchbarkeit** — Kann ein KI-Agent einen Tisch reservieren?
+- **Bestellbarkeit** — Ist deine Speisekarte maschinenlesbar für Lieferdienst-Agenten?
+- **Kontaktierbarkeit** — Findet ein Agent deine Telefonnummer, E-Mail, Adresse?
+- **Strukturierte Daten** — Sind Schema.org-Markups für Restaurants vorhanden?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Ergebnis: Ein Agent-Readiness-Score mit konkreten Schritten, um dein Restaurant fit für KI-Agenten zu machen.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Live-Demo
 
-## Learn More
+**[Jetzt kostenlos testen: agentready-gastro.vercel.app](https://agentready-gastro.vercel.app?utm_source=github&utm_medium=readme&utm_campaign=parasite)**
 
-To learn more about Next.js, take a look at the following resources:
+Kein Account nötig. Ergebnis in 30 Sekunden.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Warum das wichtig ist
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+KI-Agenten wie Google Duplex oder OpenAI Operator führen bereits Reservierungen und Bestellungen aus. Restaurants, deren Websites nicht maschinenlesbar sind, werden von diesen Agenten übersprungen — und verlieren Gäste an die Konkurrenz, die bereit ist.
 
-## Deploy on Vercel
+## Alle Scanner im Überblick
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dieses Tool ist Teil des **[AI Gastro Hub](https://ai-gastro-hub.vercel.app?utm_source=github&utm_medium=readme&utm_campaign=parasite)** — der kostenlosen AI-Readiness-Plattform für die Gastronomie.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built by [AI Shift Drift](https://ai-gastro-hub.vercel.app?utm_source=github&utm_medium=readme&utm_campaign=parasite), Berlin
