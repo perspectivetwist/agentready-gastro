@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "KI-Agent Readiness für Gastronomie | Kann KI bei deinem Restaurant reservieren?",
     description:
       "Kostenloser Agent-Readiness-Scan für die Gastronomie: Ist dein Restaurant für KI-Agenten buchbar?",
-    url: "https://agentready-gastro.vercel.app",
+    url: "https://www.ki-gastronomie.com/agent-scanner",
     siteName: "AgentReady Gastro Scanner",
     type: "website",
   },
