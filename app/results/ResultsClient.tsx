@@ -3,6 +3,8 @@
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState, Suspense } from 'react'
 import { SlipstreamResult } from '@/types/slipstream'
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 import ScoreCircle from '@/components/ScoreCircle'
 import DimensionBars from '@/components/DimensionBars'
 import ActionPlan from '@/components/ActionPlan'
@@ -51,7 +53,7 @@ function ResultsContent() {
 
     async function runScan() {
       try {
-        const res = await fetch('/api/scan', {
+        const res = await fetch(`${BASE_PATH}/api/scan`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url: decodeURIComponent(url) }),
