@@ -9,7 +9,7 @@ interface Props {
 export default function ShareButton({ score, resultUrl }: Props) {
   const [copied, setCopied] = useState(false)
 
-  const baseUrl = 'https://agentready-gastro.vercel.app'
+  const baseUrl = 'https://www.ki-gastronomie.com/agent-scanner'
   const shareText = `Ich hab gerade gecheckt ob KI-Agenten meinen Betrieb nutzen können: ${score}/100. Können KI-Agenten bei dir überhaupt buchen oder anfragen? Kostenlos testen: ${baseUrl}`
 
   function handleWhatsApp() {

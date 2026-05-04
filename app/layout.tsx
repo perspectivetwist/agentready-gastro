@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "KI-Agent Readiness für Gastronomie | Kann KI bei deinem Restaurant reservieren?",
     description:
       "Kostenloser Agent-Readiness-Scan für die Gastronomie: Ist dein Restaurant für KI-Agenten buchbar?",
-    url: "https://agentready-gastro.vercel.app",
+    url: "https://www.ki-gastronomie.com/agent-scanner",
     siteName: "AgentReady Gastro Scanner",
     type: "website",
   },
@@ -56,7 +56,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "AI Shift Drift",
-              "url": "https://ai-gastro-hub.vercel.app",
+              "url": "https://www.ki-gastronomie.com",
               "sameAs": [
                 "https://github.com/perspectivetwist",
                 "https://www.crunchbase.com/organization/ai-shift-drift"
