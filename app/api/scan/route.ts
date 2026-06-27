@@ -95,9 +95,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Scan in Notion loggen (fire-and-forget)
+    // Scan in Notion loggen
+    // WICHTIG: await, sonst killt Vercel den Notion-Write nach der Response (Zeile fehlt)
     const dimStr = score.dimensions.map((d: { name: string; score: number }) => `${d.name}: ${d.score}`).join(', ')
-    logScan(scraped.url, score.totalScore, dimStr)
+    await logScan(scraped.url, score.totalScore, dimStr)
 
     // IndexNow: Result-URL an Bing pushen (fire-and-forget)
     pingIndexNow(scraped.url)
